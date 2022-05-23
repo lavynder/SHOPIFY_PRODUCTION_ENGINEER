@@ -253,7 +253,7 @@ class main(bf, db, api):
                             print('CITY:', location_set[1])
                             print('COUNTRY', location_set[2])
                             print('\nCITY WEATHER:', weather[0])
-                            print(f'TEMPERATURE: {weather[1]:.2f} C')
+                            print(f'TEMPERATURE: {weather[1]:.1f} C')
                             
                             # ALL AVAILABLE ITEMS IN THE CITY ARE DISPLAYED
                             print('\nITEMS AT LOCATION:')
