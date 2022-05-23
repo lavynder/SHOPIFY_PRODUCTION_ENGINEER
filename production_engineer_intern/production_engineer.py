@@ -207,20 +207,20 @@ class main(bf, db, api):
                         item = bf().dataInput('ITEM YOU WISH TO VIEW').upper()
                         
                         # RETIREVES INFORMATION
-                        item_set = db()._view_item(item, 'inventory_city')
+                        itemData = db()._view_item(item, 'inventory_city')
 
                         # IF THE ITEM DOESN'T EXIST, THE USER IF NOTIFIED AND SENT ABCK TO THE MAIN MENU
-                        if item_set == None:
+                        if itemData == None:
                             print('THIS ITEM IS NOT ON THE INVENTORY LIST')
                             print('PLEASE ADD THE ITEM FIRST USING MENU OPTION 1')
                             
                         # ELSE THE CITY THAT BELONGS TO THE ITEM IS FOUND   
                         else:
-                            cityID = item_set[3]
+                            cityID = itemData[3]
                             city = db()._view_itemLocation(cityID, 'inventory_city')
                         
-                            print('ITEM SERIAL NUMBER:', item_set[1])
-                            print('ITEM DESCRIPTION:', item_set[2])
+                            print('ITEM SERIAL NUMBER:', itemData[1])
+                            print('ITEM DESCRIPTION:', itemData[2])
                             print(f'ITEM CITY: {city[1]}, {city[2]}')
                         
                         # RETURNS USER TO MAIN MENU
@@ -233,31 +233,31 @@ class main(bf, db, api):
                         location = bf().dataInput('CITY YOU WISH TO VIEW').capitalize()
                         
                         # RETRIEVES INFORMATION
-                        location_set = db()._view_location(location, 'inventory_city')
+                        locationData = db()._view_location(location, 'inventory_city')
                         
                         # IF THE LOCATION DOESN'T EXIST, THE USER IS NOTIFIED
                         # THEN THEY ARE SENT BACK TO THE MAIN MENU
-                        if location_set == None:
+                        if locationData == None:
                             print('THIS CITY IS NOT AVAILABLE')
                             print('PLEASE GO TO MENU OPTION 4 TO SEE ALL AVAILABLE CITIES')
                             
                         # ELSE THE INFORMATION IS DISPLAYED   
                         else:
                             # THE CITY AND COUNTRY INFORMATION NECESSARY FOR THE API IS CREATED
-                            city_api = f'{location_set[1]},{location_set[2]}'
+                            city_api = f'{locationData[1]},{locationData[2]}'
                             
                             # THE WEATHER INFORMATION IS SAVED
                             weather = api.get_weather(self.api_key, city_api)
                             
                             # THE INFORMATION ABOUT THE CITY IS DISPLAYED
-                            print('CITY:', location_set[1])
-                            print('COUNTRY', location_set[2])
+                            print('CITY:', locationData[1])
+                            print('COUNTRY', locationData[2])
                             print('\nCITY WEATHER:', weather[0])
                             print(f'TEMPERATURE: {weather[1]:.1f} C')
                             
                             # ALL AVAILABLE ITEMS IN THE CITY ARE DISPLAYED
                             print('\nITEMS AT LOCATION:')
-                            item_list = db()._view_allItemsLocation(location_set[0], 'inventory_city')
+                            item_list = db()._view_allItemsLocation(locationData[0], 'inventory_city')
                             for i in item_list:
                                 print(f' - {i[1]}, {i[2]}')
                         
