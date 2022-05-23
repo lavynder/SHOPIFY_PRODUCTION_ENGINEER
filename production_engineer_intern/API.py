@@ -27,13 +27,13 @@ class Weather_API:
         response = requests.get(url).json()
         
         # CREATES AN EMPTY LIST TO HOLD WEATHER INFORMATION
-        weather_data = []
+        weatherData = []
         
         # APPENDS THE INFORMATION TO THE LIST
-        weather_data.append((response['weather'][0]['description']).capitalize())
-        weather_data.append(float(response['main']['temp']) - 273.15)
+        weatherData.append((response['weather'][0]['description']).capitalize())
+        weatherData.append(float(response['main']['temp']) - 273.15)
         
         # RETURNS THE LIST
-        return weather_data
+        return weatherData
         
 
