@@ -176,7 +176,7 @@ class main(bf, db, api):
                             # RETURNS THE USER TO THE MAIN MENU
                             break
                     
-                    # IF THE USER CHANGES THEIR MIND, THEN THE CHANGE IS CANCELED
+                    # IF THE USER DOES NOT WANT TO CHANGE THE CITY, THEN THE CHANGE IS CANCELED
                     elif askUser == 'N':
                         print('NOT CHANGING CITY')
                         break
@@ -230,10 +230,10 @@ class main(bf, db, api):
                     elif viewInput == 2:
                         
                         # ASKS USER WHICH LOCATION THEY WISH TO VIEW
-                        location = bf().dataInput('CITY YOU WISH TO VIEW').capitalize()
+                        city = bf().dataInput('CITY YOU WISH TO VIEW').capitalize()
                         
                         # RETRIEVES INFORMATION
-                        locationData = db()._view_location(location, 'inventory_city')
+                        locationData = db()._view_location(city, 'inventory_city')
                         
                         # IF THE LOCATION DOESN'T EXIST, THE USER IS NOTIFIED
                         # THEN THEY ARE SENT BACK TO THE MAIN MENU
@@ -295,10 +295,10 @@ class main(bf, db, api):
                         raw_locationsData = db()._view_all_locations('inventory_city')
                         
                         # CREATES A LOCAL LIST TO HOLD ALL THE LOCATIONS
-                        location_list = [item[1] for item in raw_locationsData]
+                        city_list = [item[1] for item in raw_locationsData]
                         
                         # PRINTS ALL LOCATIONS
-                        for i in location_list:
+                        for i in city_list:
                             print(f'- {i}')
                         
                         # SENDS USER BACK TO THE MAIN MENU   
